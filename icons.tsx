@@ -44,6 +44,9 @@ const paths = {
   xCircle: <><circle cx="12" cy="12" r="9" /><path d="M9 9l6 6M15 9l-6 6" /></>,
   info: <><circle cx="12" cy="12" r="9" /><path d="M12 11v6M12 7.5v.3" /></>,
   plus: <path d="M12 5v14M5 12h14" />,
+  lock: <><rect x="5" y="11" width="14" height="10" rx="2" /><path d="M8 11V7.5a4 4 0 018 0V11" /></>,
+  swap: <path d="M4 8h15M15 4.5L19 8l-4 3.5M20 16H5M9 12.5L5 16l4 3.5" />,
+  flag: <><path d="M5 21V4" /><path d="M5 4.5h11l-2 4 2 4H5" /></>,
   inbox: <><path d="M3 13l3-8h12l3 8v6H3v-6z" /><path d="M3 13h5l1.5 2.5h5L16 13h5" /></>,
 } satisfies Record<string, ReactNode>;
 
