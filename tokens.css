@@ -1,15 +1,20 @@
 /* ================================================================
    Lagoon UI - design tokens (颜色、字号、间距、圆角)
-   来源：Cine 的「潟湖」主题。所有 app 只引用这些变量，不写死颜色。
+   所有 app 只引用这些变量，不写死颜色。
 
    层次：边框 --frame 最暗 < 侧边栏 --side < 内容 --panel 最亮，
    内容面板才像浮在上面。
 
-   切换方式（写在 <html> 上）：
-     data-theme="dark"  深色（默认）
-     data-theme="light" 浅色
-     不写 data-theme    跟随系统
-     data-density="compact"  紧凑模式（表格、日志等信息多的页面）
+   主题（写在 <html data-theme="..."> 上）：
+     lagoon        潟湖：深青 + 薄荷绿（默认）
+     lagoon-light  潟湖浅色：深青边框 + 白色内容
+     cinema        放映厅：中性暖灰 + 琥珀，适合图片多的 app
+     graphite      石墨：深灰 + 蓝，接近 VS Code
+     daylight      日光：茄紫边框 + 白色内容
+     dracula       Dracula：深紫灰 + 紫色（和 iTerm、IntelliJ 同款）
+   密度：<html data-density="compact"> 紧凑模式（表格、日志等信息多的页面）
+
+   每个主题都必须定义下面「主题变量」里的每一个变量。
    ================================================================ */
 
 /* ---------- 不随主题变的部分 ---------- */
@@ -37,7 +42,8 @@
   /* 圆角 */
   --r-sm: 5px;     /* 状态栏小按钮、kbd */
   --r-md: 7px;     /* 按钮、侧边栏行、输入框 */
-  --r-lg: 10px;    /* 卡片、工作区容器 */
+  --r-lg: 10px;    /* 工作区容器 */
+  --r-xl: 12px;    /* 卡片 */
   --r-pill: 999px; /* 胶囊标签、徽标 */
 
   /* 尺寸 */
@@ -64,13 +70,24 @@
   --content-pad: 16px;
 }
 
-/* ---------- 深色（默认）：深青 + 薄荷绿 ---------- */
-:root, [data-theme="dark"] {
+/* ================================================================
+   主题变量
+   frame-*   标题栏、状态栏（最暗的边框）
+   side-*    侧边栏
+   panel 等  内容区
+   accent-*  强调色：只表示「选中、主要操作」，不表示「成功」
+   success / warning / danger / info  状态色：含义固定，永远配图标
+   ================================================================ */
+
+/* ---------- 潟湖（默认）：深青 + 薄荷绿 ---------- */
+:root, [data-theme="lagoon"] {
   --frame: #061b1c;
   --frame-text: #dcefee;
   --frame-muted: #86aeac;
   --frame-hover: rgba(255, 255, 255, 0.08);
-  --frame-field: rgba(255, 255, 255, 0.1);  /* 标题栏里的搜索框 */
+  --frame-field: rgba(255, 255, 255, 0.1);        /* 标题栏里的搜索框 */
+  --frame-field-hover: rgba(255, 255, 255, 0.15);
+  --frame-accent: #43d6a8;                        /* 边框和侧边栏上的强调色 */
   --side: rgba(255, 255, 255, 0.06);
   --side-text: #cfe6e3;
   --side-muted: #84a9a5;
@@ -78,7 +95,6 @@
   --side-sel: rgba(255, 255, 255, 0.11);
   --side-sel-text: #ffffff;
   --side-line: rgba(255, 255, 255, 0.07);
-  --frame-accent: #43d6a8; /* 深色边框和侧边栏上的强调色 */
 
   --panel: #18221f;
   --panel-2: #1c2724;
@@ -91,14 +107,12 @@
   --muted: #8ea4a2;
   --faint: #5e7472;
 
-  /* 强调色：只表示「选中、主要操作」，不表示「成功」 */
   --accent: #43d6a8;
   --accent-ink: #05231a;
   --accent-soft: rgba(67, 214, 168, 0.13);
   --accent-line: rgba(67, 214, 168, 0.38);
 
-  /* 状态色：含义固定，所有 app 一致。
-     success 故意偏黄绿，和薄荷绿强调色拉开；并且永远配图标出现 */
+  /* success 故意偏黄绿，和薄荷绿强调色拉开 */
   --success: #9bdc6a;
   --success-soft: rgba(155, 220, 106, 0.14);
   --warning: #f2b84b;
@@ -109,20 +123,22 @@
   --info-soft: rgba(127, 209, 255, 0.14);
   --live: #43d6a8;   /* 状态栏「正在运行」的小圆点 */
 
-  --shadow: 0 18px 50px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --shadow: 0 18px 50px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.06);
   --workspace-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), 0 8px 28px rgba(0, 0, 0, 0.32);
   --scrim: rgba(2, 14, 14, 0.5);
   --kbd-bg: rgba(255, 255, 255, 0.1);
   color-scheme: dark;
 }
 
-/* ---------- 浅色：边框保持深青，内容变白 ---------- */
-[data-theme="light"] {
+/* ---------- 潟湖浅色：边框保持深青，内容变白 ---------- */
+[data-theme="lagoon-light"] {
   --frame: #0b3335;
   --frame-text: #e6f4f3;
   --frame-muted: #9cc3c0;
   --frame-hover: rgba(255, 255, 255, 0.1);
   --frame-field: rgba(255, 255, 255, 0.12);
+  --frame-field-hover: rgba(255, 255, 255, 0.17);
+  --frame-accent: #43d6a8;   /* 边框还是深色，所以用亮的薄荷绿 */
   --side: rgba(255, 255, 255, 0.07);
   --side-text: #d9ecea;
   --side-muted: #9cc0bd;
@@ -130,7 +146,6 @@
   --side-sel: rgba(255, 255, 255, 0.16);
   --side-sel-text: #ffffff;
   --side-line: rgba(255, 255, 255, 0.1);
-  --frame-accent: #43d6a8; /* 浅色主题里边框还是深色，所以用亮的薄荷绿 */
 
   --panel: #ffffff;
   --panel-2: #f6f9f9;
@@ -166,20 +181,207 @@
   color-scheme: light;
 }
 
-/* 没写 data-theme 时跟随系统：系统是浅色就用浅色 */
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme]) {
-    --frame: #0b3335; --frame-text: #e6f4f3; --frame-muted: #9cc3c0; --frame-hover: rgba(255,255,255,0.1); --frame-field: rgba(255,255,255,0.12);
-    --side: rgba(255,255,255,0.07); --side-text: #d9ecea; --side-muted: #9cc0bd; --side-hover: rgba(255,255,255,0.08);
-    --side-sel: rgba(255,255,255,0.16); --side-sel-text: #ffffff; --side-line: rgba(255,255,255,0.1); --frame-accent: #43d6a8;
-    --panel: #ffffff; --panel-2: #f6f9f9; --surface: #edf3f2; --surface-hi: #e0eae8;
-    --line: rgba(0,0,0,0.08); --line-strong: rgba(0,0,0,0.14);
-    --text: #142220; --text-2: #33433f; --muted: #62726f; --faint: #97a5a2;
-    --accent: #0f9d74; --accent-ink: #ffffff; --accent-soft: rgba(15,157,116,0.1); --accent-line: rgba(15,157,116,0.35);
-    --success: #4c8f1c; --success-soft: rgba(76,143,28,0.1); --warning: #b7780a; --warning-soft: rgba(183,120,10,0.12);
-    --danger: #d23f35; --danger-soft: rgba(210,63,53,0.1); --info: #1f78b4; --info-soft: rgba(31,120,180,0.1);
-    --shadow: 0 18px 50px rgba(5,30,30,0.22), 0 0 0 1px rgba(0,0,0,0.08); --workspace-shadow: 0 8px 28px rgba(0,0,0,0.3);
-    --scrim: rgba(5,30,30,0.28); --kbd-bg: rgba(0,0,0,0.07);
-    color-scheme: light;
-  }
+/* ---------- 放映厅：关了灯的影院。中性暖灰，界面退后，颜色交给图片；琥珀只做点缀 ----------
+   适合图片多的 app。纯文字的 app 用它会显得很灰。 */
+[data-theme="cinema"] {
+  --frame: #0c0c0d;
+  --frame-text: #ebe8e4;
+  --frame-muted: #8f8b85;
+  --frame-hover: rgba(255, 255, 255, 0.07);
+  --frame-field: rgba(255, 255, 255, 0.1);
+  --frame-field-hover: rgba(255, 255, 255, 0.15);
+  --frame-accent: #f2b84b;
+  --side: rgba(255, 255, 255, 0.04);
+  --side-text: #d2cec8;
+  --side-muted: #8a867f;
+  --side-hover: rgba(255, 255, 255, 0.05);
+  --side-sel: rgba(255, 255, 255, 0.11);
+  --side-sel-text: #ffffff;
+  --side-line: rgba(255, 255, 255, 0.07);
+
+  --panel: #171719;
+  --panel-2: #1b1b1e;
+  --surface: #252528;
+  --surface-hi: #2f2f33;
+  --line: rgba(255, 255, 255, 0.07);
+  --line-strong: rgba(255, 255, 255, 0.12);
+  --text: #f2f0ec;
+  --text-2: #d0ccc6;
+  --muted: #96928b;
+  --faint: #67635e;
+
+  --accent: #f2b84b;
+  --accent-ink: #261804;
+  --accent-soft: rgba(242, 184, 75, 0.13);
+  --accent-line: rgba(242, 184, 75, 0.38);
+
+  /* 强调色已经是琥珀，警告改用橙色和它拉开 */
+  --success: #5fd38d;
+  --success-soft: rgba(95, 211, 141, 0.14);
+  --warning: #ff9550;
+  --warning-soft: rgba(255, 149, 80, 0.14);
+  --danger: #ff6b6b;
+  --danger-soft: rgba(255, 107, 107, 0.14);
+  --info: #86c6ff;
+  --info-soft: rgba(134, 198, 255, 0.14);
+  --live: #5fd38d;
+
+  --shadow: 0 18px 50px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --workspace-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), 0 8px 28px rgba(0, 0, 0, 0.32);
+  --scrim: rgba(0, 0, 0, 0.55);
+  --kbd-bg: rgba(255, 255, 255, 0.1);
+  color-scheme: dark;
+}
+
+/* ---------- 石墨：接近 VS Code 的深灰 + 蓝 ----------
+   注意：提示色 info 也是蓝色，和强调色接近，所以提示一定要配图标。 */
+[data-theme="graphite"] {
+  --frame: #0f0f0f;
+  --frame-text: #e0e0e0;
+  --frame-muted: #8f8f8f;
+  --frame-hover: rgba(255, 255, 255, 0.07);
+  --frame-field: rgba(255, 255, 255, 0.1);
+  --frame-field-hover: rgba(255, 255, 255, 0.15);
+  --frame-accent: #3b9cff;
+  --side: rgba(255, 255, 255, 0.045);
+  --side-text: #cccccc;
+  --side-muted: #8a8a8a;
+  --side-hover: rgba(255, 255, 255, 0.05);
+  --side-sel: rgba(255, 255, 255, 0.1);
+  --side-sel-text: #ffffff;
+  --side-line: rgba(255, 255, 255, 0.07);
+
+  --panel: #1f1f1f;
+  --panel-2: #232323;
+  --surface: #2b2b2b;
+  --surface-hi: #363636;
+  --line: rgba(255, 255, 255, 0.07);
+  --line-strong: rgba(255, 255, 255, 0.12);
+  --text: #ececec;
+  --text-2: #c8c8c8;
+  --muted: #9a9a9a;
+  --faint: #6a6a6a;
+
+  --accent: #3b9cff;
+  --accent-ink: #ffffff;
+  --accent-soft: rgba(59, 156, 255, 0.14);
+  --accent-line: rgba(59, 156, 255, 0.4);
+
+  --success: #3fb950;
+  --success-soft: rgba(63, 185, 80, 0.15);
+  --warning: #e3b341;
+  --warning-soft: rgba(227, 179, 65, 0.15);
+  --danger: #f85149;
+  --danger-soft: rgba(248, 81, 73, 0.15);
+  --info: #4fc1ff;
+  --info-soft: rgba(79, 193, 255, 0.14);
+  --live: #3fb950;
+
+  --shadow: 0 18px 50px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --workspace-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), 0 8px 28px rgba(0, 0, 0, 0.32);
+  --scrim: rgba(0, 0, 0, 0.5);
+  --kbd-bg: rgba(255, 255, 255, 0.1);
+  color-scheme: dark;
+}
+
+/* ---------- 日光：茄紫边框 + 白色内容 ----------
+   注意：提示色 info 和强调色都是同一个蓝，所以提示一定要配图标。 */
+[data-theme="daylight"] {
+  --frame: #350d36;
+  --frame-text: #f4ecf4;
+  --frame-muted: #c4a9c5;
+  --frame-hover: rgba(255, 255, 255, 0.1);
+  --frame-field: rgba(255, 255, 255, 0.1);
+  --frame-field-hover: rgba(255, 255, 255, 0.15);
+  --frame-accent: #f6c85f;
+  --side: rgba(255, 255, 255, 0.07);
+  --side-text: #e6d6e6;
+  --side-muted: #b99bba;
+  --side-hover: rgba(255, 255, 255, 0.08);
+  --side-sel: rgba(255, 255, 255, 0.16);
+  --side-sel-text: #ffffff;
+  --side-line: rgba(255, 255, 255, 0.07);
+
+  --panel: #ffffff;
+  --panel-2: #f8f8f9;
+  --surface: #f1f1f3;
+  --surface-hi: #e5e5ea;
+  --line: rgba(0, 0, 0, 0.08);
+  --line-strong: rgba(0, 0, 0, 0.14);
+  --text: #1d1c1d;
+  --text-2: #3a393c;
+  --muted: #6b6a70;
+  --faint: #9b9aa1;
+
+  --accent: #1264a3;
+  --accent-ink: #ffffff;
+  --accent-soft: rgba(18, 100, 163, 0.1);
+  --accent-line: rgba(18, 100, 163, 0.35);
+
+  --success: #1f8a5b;
+  --success-soft: rgba(31, 138, 91, 0.1);
+  --warning: #b7780a;
+  --warning-soft: rgba(183, 120, 10, 0.12);
+  --danger: #d23f35;
+  --danger-soft: rgba(210, 63, 53, 0.1);
+  --info: #1264a3;
+  --info-soft: rgba(18, 100, 163, 0.1);
+  --live: #2bac76;
+
+  --shadow: 0 18px 50px rgba(30, 10, 40, 0.28), 0 0 0 1px rgba(0, 0, 0, 0.08);
+  --workspace-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), 0 8px 28px rgba(0, 0, 0, 0.32);
+  --scrim: rgba(30, 10, 40, 0.28);
+  --kbd-bg: rgba(0, 0, 0, 0.07);
+  color-scheme: light;
+}
+
+/* ---------- Dracula：深紫灰 + 紫色，和 iTerm、IntelliJ 的 Dracula 一套颜色 ----------
+   官方色板 https://draculatheme.com/contribute 。状态色正好都和紫色拉得开。 */
+[data-theme="dracula"] {
+  --frame: #191a21;
+  --frame-text: #f8f8f2;
+  --frame-muted: #8e95b5;
+  --frame-hover: rgba(255, 255, 255, 0.07);
+  --frame-field: rgba(255, 255, 255, 0.08);
+  --frame-field-hover: rgba(255, 255, 255, 0.13);
+  --frame-accent: #bd93f9;
+  --side: rgba(255, 255, 255, 0.035);
+  --side-text: #e2e2ea;
+  --side-muted: #7d86ad;
+  --side-hover: rgba(255, 255, 255, 0.05);
+  --side-sel: rgba(68, 71, 90, 0.85);   /* Dracula 的 Current Line #44475a */
+  --side-sel-text: #ffffff;
+  --side-line: rgba(255, 255, 255, 0.07);
+
+  --panel: #282a36;
+  --panel-2: #2d2f3d;
+  --surface: #383a4c;
+  --surface-hi: #44475a;
+  --line: rgba(255, 255, 255, 0.07);
+  --line-strong: rgba(255, 255, 255, 0.13);
+  --text: #f8f8f2;
+  --text-2: #dcdce4;
+  --muted: #a0a8cd;
+  --faint: #6272a4;   /* Dracula 的 Comment */
+
+  --accent: #bd93f9;
+  --accent-ink: #21222c;
+  --accent-soft: rgba(189, 147, 249, 0.15);
+  --accent-line: rgba(189, 147, 249, 0.42);
+
+  --success: #50fa7b;
+  --success-soft: rgba(80, 250, 123, 0.13);
+  --warning: #ffb86c;
+  --warning-soft: rgba(255, 184, 108, 0.14);
+  --danger: #ff5555;
+  --danger-soft: rgba(255, 85, 85, 0.15);
+  --info: #8be9fd;
+  --info-soft: rgba(139, 233, 253, 0.13);
+  --live: #50fa7b;
+
+  --shadow: 0 18px 50px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --workspace-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), 0 8px 28px rgba(0, 0, 0, 0.32);
+  --scrim: rgba(10, 10, 16, 0.55);
+  --kbd-bg: rgba(255, 255, 255, 0.1);
+  color-scheme: dark;
 }

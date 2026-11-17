@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN" data-theme="dark">
+<html lang="zh-CN" data-theme="lagoon">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,7 +45,7 @@
     </button>
     <div class="titlebar-right">
       <div class="segmented" id="theme">
-        <button data-v="dark" class="on">深色</button><button data-v="light">浅色</button>
+        <button data-v="lagoon" class="on">潟湖</button><button data-v="lagoon-light">潟湖浅色</button><button data-v="cinema">放映厅</button><button data-v="graphite">石墨</button><button data-v="daylight">日光</button><button data-v="dracula">Dracula</button>
       </div>
       <div class="segmented" id="density" style="margin-left:6px">
         <button data-v="" class="on">标准</button><button data-v="compact">紧凑</button>
@@ -55,7 +55,7 @@
 
   <div class="app-body">
     <div class="workspace">
-      <nav class="sidebar">
+      <nav class="sidebar" style="width:220px">
         <div class="sb-list scroll">
           <div class="sb-group">
             <span class="sb-title">任务</span>
@@ -75,19 +75,19 @@
         </div>
       </nav>
 
-      <main class="panel">
+      <main class="panel"><div class="column grow">
         <header class="panel-header">
           <h1>收件箱</h1><span class="panel-sub">24 项</span>
           <span class="grow"></span>
           <button class="btn accent"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><use href="#i-plus"/></svg>新建任务</button>
         </header>
         <div class="panel-body scroll">
-          <div class="stack">
-            <div class="filter-row"><span class="label">状态</span>
-              <div class="wrap"><button class="chip on">全部</button><button class="chip">进行中</button><button class="chip">等待</button><button class="chip">已完成</button></div>
+          <div class="filters">
+            <div class="filter-row"><span class="filter-label">状态</span>
+              <div class="filter-chips"><button class="chip on">全部</button><button class="chip">进行中</button><button class="chip">等待</button><button class="chip">已完成</button></div>
             </div>
-            <div class="filter-row"><span class="label">标签</span>
-              <div class="wrap"><button class="chip on">全部</button><button class="chip">工作</button><button class="chip">生活</button><button class="chip outline"># 采购</button></div>
+            <div class="filter-row"><span class="filter-label">标签</span>
+              <div class="filter-chips"><button class="chip on">全部</button><button class="chip">工作</button><button class="chip">生活</button><button class="chip outline"># 采购</button></div>
             </div>
           </div>
 
@@ -110,9 +110,9 @@
           <section class="demo-section">
             <h2>卡片（没有图片时用色块补颜色）</h2>
             <div class="card-grid">
-              <div class="card hover stack" style="gap:10px"><div class="swatch-block" style="background:linear-gradient(135deg,#0f6f63,#1fb58c)">家里装修</div><div class="row"><span class="grow">9 项 · 2 项逾期</span><span class="status warning">注意</span></div></div>
-              <div class="card hover stack" style="gap:10px"><div class="swatch-block" style="background:linear-gradient(135deg,#1d4e7a,#3f8fd0)">投资笔记</div><div class="row"><span class="grow">7 项</span><span class="status info">进行中</span></div></div>
-              <div class="card hover stack" style="gap:10px"><div class="swatch-block" style="background:linear-gradient(135deg,#6b3a14,#d08a3f)">生活</div><div class="row"><span class="grow">8 项</span><span class="status success">按时</span></div></div>
+              <div class="card pad stack" style="gap:10px"><div class="swatch-block" style="background:linear-gradient(135deg,#0f6f63,#1fb58c)">家里装修</div><div class="row"><span class="grow">9 项 · 2 项逾期</span><span class="status warning">注意</span></div></div>
+              <div class="card pad stack" style="gap:10px"><div class="swatch-block" style="background:linear-gradient(135deg,#1d4e7a,#3f8fd0)">投资笔记</div><div class="row"><span class="grow">7 项</span><span class="status info">进行中</span></div></div>
+              <div class="card pad stack" style="gap:10px"><div class="swatch-block" style="background:linear-gradient(135deg,#6b3a14,#d08a3f)">生活</div><div class="row"><span class="grow">8 项</span><span class="status success">按时</span></div></div>
             </div>
           </section>
 
@@ -128,7 +128,7 @@
             </div>
           </section>
         </div>
-      </main>
+      </div></main>
     </div>
   </div>
 
@@ -144,6 +144,8 @@
   // 切换主题和紧凑模式（只为预览）
   for (const [id, attr] of [["theme", "data-theme"], ["density", "data-density"]]) {
     const seg = document.getElementById(id);
+    const cur = document.documentElement.getAttribute(attr) ?? "";
+    seg.querySelectorAll("button").forEach(x => x.classList.toggle("on", x.dataset.v === cur));
     seg.addEventListener("click", e => {
       const b = e.target.closest("button"); if (!b) return;
       seg.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b));
