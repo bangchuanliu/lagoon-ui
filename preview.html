@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lagoon UI 预览</title>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="components.css">
+<style>
+  /* 预览页自己用的一点样式，不属于组件库 */
+  body { overflow: auto; }
+  .app { min-height: 760px; }
+  .demo-section h2 { font-size: 13px; color: var(--muted); font-weight: 600; margin-bottom: 10px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></symbol>
+    <symbol id="i-sidebar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M9 4v16M5.5 8h1.5M5.5 11h1.5"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+    <symbol id="i-inbox" viewBox="0 0 24 24"><path d="M3 13l3-8h12l3 8v6H3v-6z"/><path d="M3 13h5l1.5 2.5h5L16 13h5"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8L3.5 9.7l5.9-.8z"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-hash" viewBox="0 0 24 24"><path d="M9 4L7 20M17 4l-2 16M4 9h16M3.5 15h16"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-ok" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.8 2.8L16 9.8"/></symbol>
+    <symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 3.5L2.5 20h19L12 3.5z"/><path d="M12 10v4.5M12 17.2v.3"/></symbol>
+    <symbol id="i-err" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.3"/></symbol>
+  </defs>
+</svg>
+
+<div class="app">
+  <div class="titlebar">
+    <div class="titlebar-left">
+      <button class="tool-btn" title="侧边栏"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><use href="#i-sidebar"/></svg></button>
+      <button class="tool-btn" title="返回"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><use href="#i-back"/></svg></button>
+    </div>
+    <button class="search-field">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><use href="#i-search"/></svg>
+      <span class="grow">搜索任务、项目、标签</span><kbd>⌘K</kbd>
+    </button>
+    <div class="titlebar-right">
+      <div class="segmented" id="theme">
+        <button data-v="dark" class="on">深色</button><button data-v="light">浅色</button>
+      </div>
+      <div class="segmented" id="density" style="margin-left:6px">
+        <button data-v="" class="on">标准</button><button data-v="compact">紧凑</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-body">
+    <div class="workspace">
+      <nav class="sidebar">
+        <div class="sb-list scroll">
+          <div class="sb-group">
+            <span class="sb-title">任务</span>
+            <button class="sb-row sel"><span class="sb-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><use href="#i-inbox"/></svg></span><span class="label">收件箱</span><span class="sb-count">24</span></button>
+            <button class="sb-row"><span class="sb-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><use href="#i-star"/></svg></span><span class="label">重要</span><span class="sb-count">5</span></button>
+            <button class="sb-row"><span class="sb-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><use href="#i-clock"/></svg></span><span class="label">今天到期</span><span class="badge">3</span></button>
+            <button class="sb-row"><span class="sb-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><use href="#i-check"/></svg></span><span class="label">已完成</span><span class="sb-count">112</span></button>
+          </div>
+          <div class="sb-group">
+            <span class="sb-title">项目</span>
+            <button class="sb-row"><span class="sb-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><use href="#i-hash"/></svg></span><span class="label">家里装修</span><span class="sb-count">9</span></button>
+            <button class="sb-row"><span class="sb-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><use href="#i-hash"/></svg></span><span class="label">投资笔记</span><span class="sb-count">7</span></button>
+          </div>
+        </div>
+        <div class="sb-foot">
+          <button class="sb-row"><span class="sb-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><use href="#i-gear"/></svg></span><span class="label">设置</span></button>
+        </div>
+      </nav>
+
+      <main class="panel">
+        <header class="panel-header">
+          <h1>收件箱</h1><span class="panel-sub">24 项</span>
+          <span class="grow"></span>
+          <button class="btn accent"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><use href="#i-plus"/></svg>新建任务</button>
+        </header>
+        <div class="panel-body scroll">
+          <div class="stack">
+            <div class="filter-row"><span class="label">状态</span>
+              <div class="wrap"><button class="chip on">全部</button><button class="chip">进行中</button><button class="chip">等待</button><button class="chip">已完成</button></div>
+            </div>
+            <div class="filter-row"><span class="label">标签</span>
+              <div class="wrap"><button class="chip on">全部</button><button class="chip">工作</button><button class="chip">生活</button><button class="chip outline"># 采购</button></div>
+            </div>
+          </div>
+
+          <div class="notice warning">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><use href="#i-warn"/></svg>
+            <div>3 项任务今天到期，还没开始。</div>
+          </div>
+
+          <table class="table">
+            <thead><tr><th>任务</th><th>项目</th><th>状态</th><th class="num">到期</th></tr></thead>
+            <tbody>
+              <tr class="sel"><td>选厨房瓷砖</td><td>家里装修</td><td><span class="status warning"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><use href="#i-warn"/></svg>今天到期</span></td><td class="num">11-16</td></tr>
+              <tr><td>整理第三季度交易记录</td><td>投资笔记</td><td><span class="status info"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><use href="#i-info"/></svg>进行中</span></td><td class="num">11-20</td></tr>
+              <tr><td>付物业费</td><td>生活</td><td><span class="status success"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><use href="#i-ok"/></svg>已完成</span></td><td class="num">11-10</td></tr>
+              <tr><td>备份照片到移动硬盘</td><td>生活</td><td><span class="status danger"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><use href="#i-err"/></svg>失败</span></td><td class="num">11-12</td></tr>
+              <tr><td>联系电工</td><td>家里装修</td><td><span class="status neutral">等待</span></td><td class="num">11-25</td></tr>
+            </tbody>
+          </table>
+
+          <section class="demo-section">
+            <h2>卡片（没有图片时用色块补颜色）</h2>
+            <div class="card-grid">
+              <div class="card hover stack" style="gap:10px"><div class="swatch-block" style="background:linear-gradient(135deg,#0f6f63,#1fb58c)">家里装修</div><div class="row"><span class="grow">9 项 · 2 项逾期</span><span class="status warning">注意</span></div></div>
+              <div class="card hover stack" style="gap:10px"><div class="swatch-block" style="background:linear-gradient(135deg,#1d4e7a,#3f8fd0)">投资笔记</div><div class="row"><span class="grow">7 项</span><span class="status info">进行中</span></div></div>
+              <div class="card hover stack" style="gap:10px"><div class="swatch-block" style="background:linear-gradient(135deg,#6b3a14,#d08a3f)">生活</div><div class="row"><span class="grow">8 项</span><span class="status success">按时</span></div></div>
+            </div>
+          </section>
+
+          <section class="demo-section">
+            <h2>按钮和输入框</h2>
+            <div class="row wrap" style="gap:8px">
+              <button class="btn accent">主要操作</button><button class="btn secondary">次要</button><button class="btn ghost">轻按钮</button>
+              <button class="btn danger">删除</button><button class="btn dashed">+ 添加</button>
+            </div>
+            <div class="row" style="margin-top:14px; gap:16px; align-items:flex-start">
+              <label class="field"><span class="label">任务名</span><input class="input" placeholder="比如：买灯泡"></label>
+              <label class="field"><span class="label">到期日</span><input class="input invalid" value="11-32"><span class="hint error">日期不对</span></label>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <footer class="statusbar">
+    <span class="st-item"><span class="live-dot"></span>已同步 · 2 分钟前</span>
+    <span class="st-item">24 项待办</span>
+    <span class="grow"></span>
+    <button class="st-item attn">3 项今天到期</button>
+  </footer>
+</div>
+
+<script>
+  // 切换主题和紧凑模式（只为预览）
+  for (const [id, attr] of [["theme", "data-theme"], ["density", "data-density"]]) {
+    const seg = document.getElementById(id);
+    seg.addEventListener("click", e => {
+      const b = e.target.closest("button"); if (!b) return;
+      seg.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b));
+      if (b.dataset.v) document.documentElement.setAttribute(attr, b.dataset.v);
+      else document.documentElement.removeAttribute(attr);
+    });
+  }
+</script>
+</body>
+</html>

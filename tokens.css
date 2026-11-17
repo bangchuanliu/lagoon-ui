@@ -1,0 +1,185 @@
+/* ================================================================
+   Lagoon UI - design tokens (颜色、字号、间距、圆角)
+   来源：Cine 的「潟湖」主题。所有 app 只引用这些变量，不写死颜色。
+
+   层次：边框 --frame 最暗 < 侧边栏 --side < 内容 --panel 最亮，
+   内容面板才像浮在上面。
+
+   切换方式（写在 <html> 上）：
+     data-theme="dark"  深色（默认）
+     data-theme="light" 浅色
+     不写 data-theme    跟随系统
+     data-density="compact"  紧凑模式（表格、日志等信息多的页面）
+   ================================================================ */
+
+/* ---------- 不随主题变的部分 ---------- */
+:root {
+  /* 字体：系统字体，中文用苹方 */
+  --font: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* 字号 */
+  --fs-xs: 11px;    /* 角标、kbd */
+  --fs-sm: 12px;    /* 计数、状态栏、次要说明 */
+  --fs-base: 13px;  /* 正文、按钮、标签 */
+  --fs-md: 14px;    /* 侧边栏行 */
+  --fs-lg: 17px;    /* 页面标题 */
+  --fs-xl: 22px;    /* 大标题（详情页） */
+
+  /* 间距：4 的倍数 */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+
+  /* 圆角 */
+  --r-sm: 5px;     /* 状态栏小按钮、kbd */
+  --r-md: 7px;     /* 按钮、侧边栏行、输入框 */
+  --r-lg: 10px;    /* 卡片、工作区容器 */
+  --r-pill: 999px; /* 胶囊标签、徽标 */
+
+  /* 尺寸 */
+  --titlebar-h: 44px;
+  --statusbar-h: 26px;
+  --row-h: 30px;        /* 侧边栏行、按钮、标签的高度 */
+  --control-h: 28px;    /* 输入框、图标按钮 */
+  --header-h: 52px;     /* 内容面板顶部标题栏 */
+  --content-pad: 24px;  /* 内容区左右留白 */
+  --traffic-light-w: 84px; /* macOS 红黄绿按钮占的宽度 */
+
+  /* 动画 */
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --fast: 120ms;
+}
+
+/* 紧凑模式：只改尺寸，不改颜色 */
+[data-density="compact"] {
+  --fs-base: 12px;
+  --fs-md: 13px;
+  --row-h: 26px;
+  --control-h: 24px;
+  --header-h: 44px;
+  --content-pad: 16px;
+}
+
+/* ---------- 深色（默认）：深青 + 薄荷绿 ---------- */
+:root, [data-theme="dark"] {
+  --frame: #061b1c;
+  --frame-text: #dcefee;
+  --frame-muted: #86aeac;
+  --frame-hover: rgba(255, 255, 255, 0.08);
+  --frame-field: rgba(255, 255, 255, 0.1);  /* 标题栏里的搜索框 */
+  --side: rgba(255, 255, 255, 0.06);
+  --side-text: #cfe6e3;
+  --side-muted: #84a9a5;
+  --side-hover: rgba(255, 255, 255, 0.06);
+  --side-sel: rgba(255, 255, 255, 0.11);
+  --side-sel-text: #ffffff;
+  --side-line: rgba(255, 255, 255, 0.07);
+  --frame-accent: #43d6a8; /* 深色边框和侧边栏上的强调色 */
+
+  --panel: #18221f;
+  --panel-2: #1c2724;
+  --surface: #25322f;
+  --surface-hi: #2f3e3a;
+  --line: rgba(255, 255, 255, 0.07);
+  --line-strong: rgba(255, 255, 255, 0.12);
+  --text: #ecf4f3;
+  --text-2: #c6d6d4;
+  --muted: #8ea4a2;
+  --faint: #5e7472;
+
+  /* 强调色：只表示「选中、主要操作」，不表示「成功」 */
+  --accent: #43d6a8;
+  --accent-ink: #05231a;
+  --accent-soft: rgba(67, 214, 168, 0.13);
+  --accent-line: rgba(67, 214, 168, 0.38);
+
+  /* 状态色：含义固定，所有 app 一致。
+     success 故意偏黄绿，和薄荷绿强调色拉开；并且永远配图标出现 */
+  --success: #9bdc6a;
+  --success-soft: rgba(155, 220, 106, 0.14);
+  --warning: #f2b84b;
+  --warning-soft: rgba(242, 184, 75, 0.14);
+  --danger: #ff7a70;
+  --danger-soft: rgba(255, 122, 112, 0.14);
+  --info: #7fd1ff;
+  --info-soft: rgba(127, 209, 255, 0.14);
+  --live: #43d6a8;   /* 状态栏「正在运行」的小圆点 */
+
+  --shadow: 0 18px 50px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --workspace-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), 0 8px 28px rgba(0, 0, 0, 0.32);
+  --scrim: rgba(2, 14, 14, 0.5);
+  --kbd-bg: rgba(255, 255, 255, 0.1);
+  color-scheme: dark;
+}
+
+/* ---------- 浅色：边框保持深青，内容变白 ---------- */
+[data-theme="light"] {
+  --frame: #0b3335;
+  --frame-text: #e6f4f3;
+  --frame-muted: #9cc3c0;
+  --frame-hover: rgba(255, 255, 255, 0.1);
+  --frame-field: rgba(255, 255, 255, 0.12);
+  --side: rgba(255, 255, 255, 0.07);
+  --side-text: #d9ecea;
+  --side-muted: #9cc0bd;
+  --side-hover: rgba(255, 255, 255, 0.08);
+  --side-sel: rgba(255, 255, 255, 0.16);
+  --side-sel-text: #ffffff;
+  --side-line: rgba(255, 255, 255, 0.1);
+  --frame-accent: #43d6a8; /* 浅色主题里边框还是深色，所以用亮的薄荷绿 */
+
+  --panel: #ffffff;
+  --panel-2: #f6f9f9;
+  --surface: #edf3f2;
+  --surface-hi: #e0eae8;
+  --line: rgba(0, 0, 0, 0.08);
+  --line-strong: rgba(0, 0, 0, 0.14);
+  --text: #142220;
+  --text-2: #33433f;
+  --muted: #62726f;
+  --faint: #97a5a2;
+
+  /* 白底上薄荷绿太浅，加深到能看清 */
+  --accent: #0f9d74;
+  --accent-ink: #ffffff;
+  --accent-soft: rgba(15, 157, 116, 0.1);
+  --accent-line: rgba(15, 157, 116, 0.35);
+
+  --success: #4c8f1c;
+  --success-soft: rgba(76, 143, 28, 0.1);
+  --warning: #b7780a;
+  --warning-soft: rgba(183, 120, 10, 0.12);
+  --danger: #d23f35;
+  --danger-soft: rgba(210, 63, 53, 0.1);
+  --info: #1f78b4;
+  --info-soft: rgba(31, 120, 180, 0.1);
+  --live: #43d6a8;
+
+  --shadow: 0 18px 50px rgba(5, 30, 30, 0.22), 0 0 0 1px rgba(0, 0, 0, 0.08);
+  --workspace-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
+  --scrim: rgba(5, 30, 30, 0.28);
+  --kbd-bg: rgba(0, 0, 0, 0.07);
+  color-scheme: light;
+}
+
+/* 没写 data-theme 时跟随系统：系统是浅色就用浅色 */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    --frame: #0b3335; --frame-text: #e6f4f3; --frame-muted: #9cc3c0; --frame-hover: rgba(255,255,255,0.1); --frame-field: rgba(255,255,255,0.12);
+    --side: rgba(255,255,255,0.07); --side-text: #d9ecea; --side-muted: #9cc0bd; --side-hover: rgba(255,255,255,0.08);
+    --side-sel: rgba(255,255,255,0.16); --side-sel-text: #ffffff; --side-line: rgba(255,255,255,0.1); --frame-accent: #43d6a8;
+    --panel: #ffffff; --panel-2: #f6f9f9; --surface: #edf3f2; --surface-hi: #e0eae8;
+    --line: rgba(0,0,0,0.08); --line-strong: rgba(0,0,0,0.14);
+    --text: #142220; --text-2: #33433f; --muted: #62726f; --faint: #97a5a2;
+    --accent: #0f9d74; --accent-ink: #ffffff; --accent-soft: rgba(15,157,116,0.1); --accent-line: rgba(15,157,116,0.35);
+    --success: #4c8f1c; --success-soft: rgba(76,143,28,0.1); --warning: #b7780a; --warning-soft: rgba(183,120,10,0.12);
+    --danger: #d23f35; --danger-soft: rgba(210,63,53,0.1); --info: #1f78b4; --info-soft: rgba(31,120,180,0.1);
+    --shadow: 0 18px 50px rgba(5,30,30,0.22), 0 0 0 1px rgba(0,0,0,0.08); --workspace-shadow: 0 8px 28px rgba(0,0,0,0.3);
+    --scrim: rgba(5,30,30,0.28); --kbd-bg: rgba(0,0,0,0.07);
+    color-scheme: light;
+  }
+}
