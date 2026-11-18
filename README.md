@@ -28,6 +28,7 @@
 | `tokens.css` | 所有颜色、字号、间距、圆角的变量。深色、浅色、紧凑模式都在这里 |
 | `components.css` | 窗口骨架和组件：标题栏、侧边栏、状态栏、按钮、胶囊标签、输入框、卡片、表格、提示条、对话框 |
 | `icons.tsx` | 线条图标（React），用法 `<Icon name="search" />` |
+| `i18n.tsx` / `language.ts` | English / 简体中文 / 日本語：语言选择、翻译、通用文案、本地保存和跨窗口同步 |
 | `preview.html` | 示例页面：一个任务管理 app，证明这套风格不只适合电影 |
 | `package.json` | 让它能作为本地包安装 |
 
@@ -93,6 +94,48 @@
    document.documentElement.dataset.theme = "lagoon-light"; // 见上面「配色」
    document.documentElement.dataset.density = "compact"; // 删掉属性 = 标准
    ```
+
+## Language
+
+`lagoon-ui/i18n` provides English (`en`), Simplified Chinese (`zh-CN`), and Japanese (`ja`),
+common labels, a `LanguageSelect` component, and a React subscription.
+Apps own their domain-specific messages and choose their default language and
+storage key. The same key synchronizes windows on the same origin; other apps
+can use separate keys.
+
+```tsx
+import { createI18n, LanguageSelect } from "lagoon-ui/i18n";
+
+export const { t, useI18n } = createI18n({
+  defaultLanguage: "zh-CN",
+  storageKey: "my-app:language",
+  messages: {
+    en: { "共 {count} 项": "{count} items" },
+    ja: { "共 {count} 项": "{count} 件" },
+  },
+});
+
+function Preferences() {
+  const { language, setLanguage } = useI18n();
+  return <label>{t("语言")}<LanguageSelect language={language} onChange={setLanguage} /></label>;
+}
+```
+
+Source strings are the fallback when a translation is absent. Named values
+use `t("共 {count} 项", { count: 3 })`. Unknown placeholders are kept intact,
+including link-template tokens. App messages override shared labels.
+Call `useI18n()` in components with translated content so language changes
+update the screen without resetting app state. The exported `t` reads the
+current language when used in callbacks. Include `language` in dependencies
+of memoized translated values.
+
+Language preferences use plain `en`, `zh-CN`, or `ja` values in local storage.
+Storage failures are reported to the console; switching still works in memory.
+Invalid saved languages fall back to the app's default.
+`lagoon-ui/language` exposes `translate`, `createLanguageStore`, and the language
+list without importing React.
+
+Run the core tests with Node 22.18+ or Node 24+: `npm test`.
 
 ## 规则
 

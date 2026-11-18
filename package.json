@@ -7,7 +7,12 @@
   "exports": {
     "./tokens.css": "./tokens.css",
     "./components.css": "./components.css",
-    "./icons": "./icons.tsx"
+    "./icons": "./icons.tsx",
+    "./i18n": "./i18n.tsx",
+    "./language": "./language.ts"
+  },
+  "scripts": {
+    "test": "node --experimental-strip-types --test language.test.ts"
   },
   "peerDependencies": {
     "react": ">=18"
